@@ -33,6 +33,27 @@ public class lesson2
         Console.WriteLine("Введите длину массива: целое число больше или равное 2.");
         int arrLength = 0;
         
+        static int ReadInt()
+        {
+            // Функция для получения из консоли целого числа.
+        
+            int value = 0;
+            bool isFormatRight = false;
+
+            while (!isFormatRight)
+            {
+                if (int.TryParse(Console.ReadLine(), out value))
+                {
+                    isFormatRight = true;
+                }
+                else
+                {
+                    Console.WriteLine("Введите целое число от -2147483648 до 2147483647");
+                }
+            }
+            return value;
+        }
+        
         // Защита от некорректного ввода длины массива.
         while (arrLength < 2)
         {
@@ -41,6 +62,22 @@ public class lesson2
             {
                 Console.WriteLine("Вводите целое положительное число, больше или равное 2.");
             }
+        }
+        
+        static int[] GetIntArrayFromConsole(int lenght)
+        {
+            // Функция заполнения массива целыми числами с клавиатуры.
+            // На входе - длина массива.
+        
+            var array = new int[lenght];
+            Console.WriteLine("Введите массив целых чисел: каждое число с новой строки.");
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = ReadInt();
+            }
+
+            return array;
         }
         
         var arrNum = GetIntArrayFromConsole(arrLength);
@@ -72,7 +109,7 @@ public class lesson2
         }
         */
 
-        Console.WriteLine("Второй максимальный элемент массива" + ArraySecondMaxNum(arrNum));
+        Console.WriteLine("Второй максимальный элемент массива = " + ArraySecondMaxNum(arrNum));
     }
 
     static int ArraySecondMaxNum(int[] arrNum)
@@ -94,43 +131,5 @@ public class lesson2
             */
             
             return arrNum[1];
-    }
-
-    static int ReadInt()
-    {
-        // Функция для получения из консоли целого числа.
-        
-        int value = 0;
-        bool isFormatRight = false;
-
-        while (!isFormatRight)
-        {
-            if (int.TryParse(Console.ReadLine(), out value))
-            {
-                isFormatRight = true;
-            }
-            else
-            {
-                Console.WriteLine("Введите целое число от -2147483648 до 2147483647");
-            }
-        }
-        return value;
-    }
-
-    
-    static int[] GetIntArrayFromConsole(int lenght)
-    {
-        // Функция заполнения массива целыми числами с клавиатуры.
-        // На входе - длина массива.
-        
-        var array = new int[lenght];
-        Console.WriteLine("Введите массив целых чисел: каждое число с новой строки.");
-
-        for (int i = 0; i < array.Length; i++)
-        {
-            array[i] = ReadInt();
-        }
-
-        return array;
     }
 }

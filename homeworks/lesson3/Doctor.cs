@@ -3,7 +3,7 @@ namespace lesson3;
 public class Doctor
 {
     public static int NumberOfDoctors { get; private set; }
-    public int PatientCounter { get; private set; }
+    public int PatientCounter { get; protected set; }
 
     // Список, в котором хранятся все оценки доктора
     // Rider сказал сделать его readonly :|
@@ -38,18 +38,15 @@ public class Doctor
         Console.WriteLine($"{Speciality} - Приём у врача {Name}: стаж {WorkExperience}, рейтинг {Rating}");
         PatientCounter++;
 
-        bool isHealth = new Random().Next(2) == 1;
+        curingPatient.IsHealth = new Random().Next(2) == 1;
 
-        curingPatient.IsHealth = isHealth;
-
-        Console.WriteLine(isHealth ? $"Пациент {curingPatient.Name} здоров!" : $"Пациент {curingPatient.Name} болен!");
+        Console.WriteLine(curingPatient.IsHealth ? $"Пациент {curingPatient.Name} здоров!" : $"Пациент {curingPatient.Name} болен!");
     }
 
     public void RecordToDoctor(Patient patient, string otherDocName)
         // Метод направления к другому специалисту
     {
-        if (true)
-            // Тут должны быть какие-нибудь взаимодействия с БД, но их нет :)
-            Console.WriteLine($"Пациент {patient.Name} записан к врачу {otherDocName}");
+        // Тут должны быть какие-нибудь взаимодействия с БД, но их нет :)
+            Console.WriteLine($"{Speciality} {Name}: Пациент {patient.Name} записан к врачу {otherDocName}");
     }
 }

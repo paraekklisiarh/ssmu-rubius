@@ -6,10 +6,18 @@ public class CardioDoc : Doctor
     {
     }
 
+    private bool CardioExam()
+        // Собственая функция оценки здоровья врачом-специалистом
+    {
+        return new Random().Next(5) == 1;
+    }
     public override void Cure(Patient curingPatient)
     {
-        bool isHealth = new Random().Next(5) == 1;
-        Console.WriteLine(isHealth
+        Console.WriteLine($"{Speciality} - Приём у врача {Name}: стаж {WorkExperience}, рейтинг {Rating}");
+        PatientCounter++;
+        
+        curingPatient.IsHealth = CardioExam();
+        Console.WriteLine(curingPatient.IsHealth
             ? $"Пациент {curingPatient.Name} кардиологической патологии не имеет."
             : $"Пациент {curingPatient.Name} болен!");
     }

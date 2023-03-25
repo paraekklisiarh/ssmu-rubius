@@ -15,10 +15,10 @@ public class Patient
     public bool IsHealth { get; set; }
 
     // Список нелюбимых докторов пациента
-    public List<string> HatingDoctors = new();
+    public readonly List<string> HatingDoctors = new();
 
-    public void HateDoctor(string doctorName)
-        // 
+    private void HateDoctor(string doctorName)
+        // Функция добвления нелюбимых докторов
     {
         if (HatingDoctors.Contains(doctorName)) return;
         HatingDoctors.Add(doctorName);
@@ -26,9 +26,9 @@ public class Patient
     }
 
     // Список любимых докторов пациента
-    public List<string> LovingDoctors = new();
+    public readonly List<string> LovingDoctors = new();
 
-    public void LoveDoctor(string doctorName)
+    private void LoveDoctor(string doctorName)
     {
         if (LovingDoctors.Contains(doctorName)) return;
         LovingDoctors.Add(doctorName);
@@ -44,10 +44,10 @@ public class Patient
         switch (score)
         {
             case < 50:
-                HatingDoctors.Add(doctor.Name);
+                HateDoctor(doctor.Name);
                 break;
             case > 90:
-                LovingDoctors.Add(doctor.Name);
+                LoveDoctor(doctor.Name);
                 break;
         }
     }

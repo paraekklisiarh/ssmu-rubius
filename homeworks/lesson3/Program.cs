@@ -30,7 +30,8 @@ public static class Program
                 throw new ArgumentException(
                     $"Врачи специальности '{speciality}' не могут работать в нашей больнице");
         }
-
+        
+        // Ну, допустим, из БД построчно получаем
         try
         {
             NewDoctor("Невролог", "Ау И.И.", 5);
@@ -76,6 +77,7 @@ public static class Program
             if (patient.LovingDoctors.Count > 0)
             {
                 // Эту строку написал ChatGPT, я ещё не умею в лямбды, зато я придумал логику и написал второй кусок!
+                // Получение списка объектов любимых докторов той же специальности
                 /*
                  * Assuming you want to find the doctors from the `doctors` list whose names are contained
                  * in the `LovingDoctors` list, you can use LINQ to achieve this. Example:
@@ -88,8 +90,8 @@ public static class Program
                  * which is stored in the `lovingDoctors` variable.
                  */
                 var lovingDoctors = doctors.Where(d => patient.LovingDoctors.Contains(d.Name))
-                    .Where(d => d.Speciality == doctor.Speciality)
-                    .ToList(); // но могут предпочесть только внутри специальности
+                    .Where(d => d.Speciality == doctor.Speciality) // но могут предпочесть только внутри специальности
+                    .ToList(); 
 
                 if (lovingDoctors.Count > 0 && !lovingDoctors.Contains(doctor))
                 {
@@ -120,6 +122,7 @@ public static class Program
         {
             {
                 // Список пациентов для сегодняшего приёма
+                // Отдельный список создаётся в т.ч. потому, что внутри цикла удаляется элемент
                 var currentDayPatients = patients.ToList();
 
                 foreach (var patient in currentDayPatients)

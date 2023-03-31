@@ -2,6 +2,7 @@ namespace lesson3;
 
 public class Doctor
 {
+    // Счетчик принятых пациентов
     public int PatientCounter { get; protected set; }
 
     // Список, в котором хранятся все оценки доктора
@@ -20,10 +21,19 @@ public class Doctor
     }
 
     public string Name { get; init; }
-    public string Speciality { get; set; }
+
+    public enum Specialities
+    {
+        Терапевт,
+        Невролог,
+        Кардиолог
+    }
+
+    public Specialities Speciality { get; set; }
     public byte WorkExperience { get; set; }
 
-    public Doctor(string speciality, string name, byte workExperience)
+
+    public Doctor(Specialities speciality, string name, byte workExperience)
     {
         Name = name;
         Speciality = speciality;
@@ -38,13 +48,15 @@ public class Doctor
 
         curingPatient.IsHealth = new Random().Next(2) == 1;
 
-        Console.WriteLine(curingPatient.IsHealth ? $"Пациент {curingPatient.Name} здоров!" : $"Пациент {curingPatient.Name} болен!");
+        Console.WriteLine(curingPatient.IsHealth
+            ? $"Пациент {curingPatient.Name} здоров!"
+            : $"Пациент {curingPatient.Name} болен!");
     }
 
     public void RecordToDoctor(Patient patient, string otherDocName)
         // Метод направления к другому специалисту
     {
         // Тут должны быть какие-нибудь взаимодействия с БД, но их нет :)
-            Console.WriteLine($"{Speciality} {Name}: Пациент {patient.Name} записан к врачу {otherDocName}");
+        Console.WriteLine($"{Speciality} {Name}: Пациент {patient.Name} записан к врачу {otherDocName}");
     }
 }

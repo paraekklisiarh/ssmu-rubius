@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Спроектируем онлайн больницу. 
    Создайте классы врачей и пациентов. 
    У каждого врача и пациента должны быть набор свойств и методов (минимум 3 свойства и 2 метода) 
@@ -11,6 +11,8 @@
  * Извините, пожалуйста. :)
  */
 
+using lesson3.Doctors;
+
 namespace lesson3;
 
 public static class Program
@@ -19,14 +21,21 @@ public static class Program
     static readonly List<Doctor> Doctors = new List<Doctor>(15);
 
     // Создаём докторов (они должны храниться где-то в БД, но ее нет)
-    static void NewDoctor(string speciality, string name, byte workExperience)
+    static void NewDoctor(Doctor.Specialities speciality, string name, byte workExperience)
     {
-        // Не на каждого доктора у нас есть лицензия
-        if (speciality is "Терапевт" or "Невролог" or "Кардиолог")
-            Doctors.Add(new Doctor(speciality, name, workExperience));
-        else
-            throw new ArgumentException(
-                $"Врачи специальности '{speciality}' не могут работать в нашей больнице");
+        switch (speciality)
+        {
+            case Doctor.Specialities.Невролог:
+                Doctors.Add(new NeurologyDoc(name: name, speciality: speciality, workExperience));
+                break;
+            case Doctor.Specialities.Кардиолог:
+                Doctors.Add(new CardioDoc(name, speciality, workExperience));
+                break;
+            case Doctor.Specialities.Терапевт:
+            default:
+                Doctors.Add(new Doctor(speciality, name, workExperience));
+                break;
+        }
     }
 
     // Общий список всех пациентов больницы
@@ -97,18 +106,10 @@ public static class Program
     public static void Main()
     {
         // Заполняем список докторов
-        try
-        {
-            NewDoctor("Невролог", "Ау И.И.", 5);
-            NewDoctor("Кардиолог", "Иванов В.И.", 5);
-            NewDoctor("Кардиолог", "Иванов А.И.", 3);
-            NewDoctor("Терапевт", "Коновалов Г.В.", 0);
-            NewDoctor("Мясник", "Коновалов В.В.", 0);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        NewDoctor(Doctor.Specialities.Невролог, "Ау И.И.", 5);
+        NewDoctor(Doctor.Specialities.Кардиолог, "Иванов В.И.", 5);
+        NewDoctor(Doctor.Specialities.Кардиолог, "Иванов А.И.", 3);
+        NewDoctor(Doctor.Specialities.Терапевт, "Коновалов Г.В.", 0);
 
         NewPatient(25, "Цы А.И.");
         NewPatient(79, "Цы И.А.");

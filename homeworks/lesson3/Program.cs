@@ -118,8 +118,8 @@ public static class Program
         Console.WriteLine("Пациенты больницы:");
         foreach (var item in Patients) Console.WriteLine($"{item.Name} : {item.Age} : Здоров: {item.IsHealth}");
 
-        // Все пациенты должны быть приняты!
-        var appointmentIndex = 0;
+        // Симуляция приёма пациентов
+        var appointmentIndex = 2; // Магическое число итераций сиумуляции
         do
         {
             {
@@ -132,9 +132,10 @@ public static class Program
                     var randomDoc = new Random().Next(Doctors.Count);
                     DoctorAppointment(patient, Doctors[randomDoc]);
                 }
+                Console.WriteLine("День окончен");
             }
-            appointmentIndex++;
-        } while (appointmentIndex < 2);
+            appointmentIndex--;
+        } while (appointmentIndex != 0);
 
 
         Console.WriteLine("Ежедневный отчёт о пациентах:");

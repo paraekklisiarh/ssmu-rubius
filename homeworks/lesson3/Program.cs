@@ -21,8 +21,13 @@ public static class Program
     static readonly List<Doctor> Doctors = new List<Doctor>(15);
 
     // Создаём докторов (они должны храниться где-то в БД, но ее нет)
-    static void NewDoctor(Doctor.Specialities speciality, string name, byte workExperience)
+    static void NewDoctor(string specialityString, string name, byte workExperience)
     {
+        if (!Enum.TryParse(specialityString, out Doctor.Specialities speciality))
+        {
+            throw new ArgumentException($"Врач специальности {specialityString} не может работать в нашей больнице");
+        }
+        
         switch (speciality)
         {
             case Doctor.Specialities.Невролог:
@@ -106,10 +111,18 @@ public static class Program
     public static void Main()
     {
         // Заполняем список докторов
-        NewDoctor(Doctor.Specialities.Невролог, "Ау И.И.", 5);
-        NewDoctor(Doctor.Specialities.Кардиолог, "Иванов В.И.", 5);
-        NewDoctor(Doctor.Specialities.Кардиолог, "Иванов А.И.", 3);
-        NewDoctor(Doctor.Specialities.Терапевт, "Коновалов Г.В.", 0);
+        NewDoctor("Невролог", "Ау И.И.", 5);
+        NewDoctor("Кардиолог", "Иванов В.И.", 5);
+        NewDoctor("Кардиолог", "Иванов А.И.", 3);
+        NewDoctor("Терапевт", "Коновалов Г.В.", 0);
+        try
+        {
+            NewDoctor("Мясник", "Dr.Hannibal", 25);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
 
         NewPatient(25, "Цы А.И.");
         NewPatient(79, "Цы И.А.");

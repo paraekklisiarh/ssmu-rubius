@@ -2,7 +2,6 @@ namespace lesson3;
 
 public class Doctor
 {
-    public static int NumberOfDoctors { get; private set; }
     public int PatientCounter { get; protected set; }
 
     // Список, в котором хранятся все оценки доктора
@@ -29,7 +28,6 @@ public class Doctor
         Name = name;
         Speciality = speciality;
         WorkExperience = workExperience;
-        NumberOfDoctors++;
     }
 
     public virtual void Cure(Patient curingPatient)

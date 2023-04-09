@@ -4,11 +4,22 @@ public static class CsvManager
 {
     private const string Separator = "\"\\t\"";
 
+    /// <summary>
+    /// Метод, считывающий построчно CSV и преобразующий его в объекты класса DirectoryItem
+    /// </summary>
+    /// <param name="pathToCsv"></param>
+    /// <returns>List of DirectoryItem</returns>
+    /// <exception cref="FileLoadException"></exception>
     public static List<DirectoryItem> GetItemsFromCsv(string pathToCsv)
+        // Можно разделить на два метода: CsvLinesParseToItem() и CsvLinesRead(),
+        // но лень обрабатывать ошибки дважды.
     {
         var items = new List<DirectoryItem>();
 
-        var csv = File.ReadAllLines(pathToCsv);
+        // Для получения построчно таблиц из файла ReadLines предпочтительнее ReadAllLines
+        // т.к. тратит на порядок меньше ресурсов, считывая буквально построчно.
+        var csv = File.ReadLines(pathToCsv);
+
         // Я знаю, что это можно свернуть через LINQ,
         // но я этого не делаю потому, что не до конца в нём преисполнился.
         foreach (var line in csv)

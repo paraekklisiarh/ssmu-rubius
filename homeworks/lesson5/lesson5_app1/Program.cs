@@ -67,7 +67,7 @@ static class Lesson5App1
         
         try
         {
-            directoryContent = FileManager.GetDirectoryContents(UnarchDirectory);
+            directoryContent = FileManager.GetDirectoryContents(Path.GetFullPath(UnarchDirectory));
         }
         // Вызываю прерывания потому, что получить названия критически важно.
         catch (DirectoryNotFoundException)

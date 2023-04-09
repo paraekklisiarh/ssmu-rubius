@@ -17,9 +17,9 @@ namespace lesson5_app2;
 
 static class Lesson5App2
 {
-    private static readonly string PathToDesiredFile = 
+    private static readonly string PathToDesiredFile =
         Environment.ExpandEnvironmentVariables(@"%AppData%/Lesson12Homework.txt");
-    
+
     static void Main()
     {
         // 1. Считывает путь к файлу из %AppData%/Lesson12Homework.txt
@@ -45,7 +45,7 @@ static class Lesson5App2
             Console.WriteLine(e);
             throw;
         }
-        
+
         if (pathToCsvFile.Length == 0)
         {
             Console.WriteLine($"Файл {PathToDesiredFile} пуст или повреждён. Запустите программу №1.");
@@ -63,15 +63,15 @@ static class Lesson5App2
             Console.WriteLine(e);
             throw;
         }
-        
+
         // 3. Выводит в консоль список файлов, прочитанный из файла csv, отсортированный по дате изменения
-        Console.WriteLine($"{"Тип",2} {"Название", 20} {"Дата изменения", 40}");
+        Console.WriteLine($"{"Тип",2} {"Название",20} {"Дата изменения",40}");
         foreach (var item in contentList.OrderBy(x => x.DateLastChange))
         {
             Console.WriteLine($"{item.Type,2} {item.Name,4} {item.DateLastChange,40}");
         }
 
         // 4. Удаляет файл %AppData%/Lesson12Homework.txt
-        //File.Delete(PathToDesiredFile);
+        File.Delete(PathToDesiredFile);
     }
 }

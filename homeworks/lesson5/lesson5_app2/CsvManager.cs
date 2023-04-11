@@ -8,7 +8,7 @@ public static class CsvManager
     /// Метод, считывающий построчно CSV и преобразующий его в объекты класса DirectoryItem
     /// </summary>
     /// <param name="pathToCsv"></param>
-    /// <returns>List of DirectoryItem</returns>
+    /// <returns>Список из объектов класса <see cref="DirectoryItem" /> </returns>
     /// <exception cref="FileLoadException"></exception>
     public static List<DirectoryItem> GetItemsFromCsv(string pathToCsv)
         // Можно разделить на два метода: CsvLinesParseToItem() и CsvLinesRead(),

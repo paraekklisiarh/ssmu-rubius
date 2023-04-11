@@ -3,7 +3,7 @@
 public static class CsvManager
 {
     /// <summary>
-    /// Метод создает CSV-таблицу из списка объектов класса directoryItem
+    /// Метод создает CSV-таблицу из списка объектов класса <see cref="DirectoryItem"/>
     /// </summary>
     /// <param name="directoryItems"></param>
     /// <param name="fileName"></param>

@@ -3,10 +3,10 @@
 public static class FileManager
 {
     /// <summary>
-    /// Метод возвращающий содержимое указанной папки
+    /// Метод, возвращающий содержимое указанной папки
     /// </summary>
     /// <param name="dirPath"></param>
-    /// <returns></returns>
+    /// <returns>Список из объектов класса <see cref="DirectoryItem"/></returns>
     public static List<DirectoryItem> GetDirectoryContents(string dirPath)
     {
         var content = new List<DirectoryItem>();
@@ -32,7 +32,7 @@ public static class FileManager
     }
 
     /// <summary>
-    /// Метод создает файл и записывает в него content.
+    /// Метод создает файл и записывает в него строку.
     /// Существующий файл перезаписывается.
     /// </summary>
     /// <param name="filePath"></param>

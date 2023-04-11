@@ -18,7 +18,7 @@ public static class FileManager
             content.Add(new DirectoryItem(
                 DirectoryItem.ItemTypes.Directory,
                 directory.Remove(0,dirPath.Length+1), //archive\dir -> dir
-                Directory.GetLastWriteTime(dirPath)));
+                Directory.GetLastWriteTime(directory)));
         }
 
         var files = Directory.GetFiles(dirPath);

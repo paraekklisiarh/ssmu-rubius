@@ -7,7 +7,7 @@ public static class FileManager
     /// </summary>
     /// <param name="dirPath"></param>
     /// <returns>Список из объектов класса <see cref="DirectoryItem"/></returns>
-    public static List<DirectoryItem> GetDirectoryContents(string dirPath)
+    public static List<DirectoryItem> GetDirectoryContent(string dirPath)
     {
         var content = new List<DirectoryItem>();
 

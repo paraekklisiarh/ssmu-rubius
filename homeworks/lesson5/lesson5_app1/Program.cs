@@ -33,7 +33,7 @@ static class Lesson5App1
         Console.WriteLine($"Распакован архив {archiveName}");
     }
 
-    static void Main()
+    static async Task Main()
     {
         // 1. Распаковывает архив в папку рядом с запускаемым файлом программы
         try
@@ -135,7 +135,7 @@ static class Lesson5App1
         // 5. Сохраняет путь к файлу csv в файле %AppData%/Lesson12Homework.txt
         try
         {
-            FileManager.ForceRecordToNewFile(
+            await FileManager.ForceRecordToNewFileAsync(
                 filePath: Environment.ExpandEnvironmentVariables(PathToTemporaryFile),
                 content: Path.GetFullPath(CsvName));
         }

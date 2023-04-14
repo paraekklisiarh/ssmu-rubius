@@ -4,21 +4,39 @@ public static class CsvManager
 {
     private const string Separator = "\"\\t\"";
 
+    private static async Task<string> ReadCsv(string pathToCsv)
+    {
+        using var streamReader = new StreamReader(pathToCsv);
+        var rawCsv = await streamReader.ReadToEndAsync();
+        if (rawCsv == null)
+        {
+            throw new FileLoadException();
+        }
+        return rawCsv;
+    }
+
+    private static List<string> ParseLines(string? rawCsv)
+    {
+        var csv = new List<string>();
+        
+        csv.AddRange(rawCsv!.Split("\r\n"));
+        csv.Remove(csv.Last()); // Костыль: удаляем пустую строку (\r\n в конце последней строки CSV)
+        
+        return csv;
+    }
+
     /// <summary>
-    /// Метод, считывающий построчно CSV и преобразующий его в объекты класса DirectoryItem
+    /// Метод, преобразующий CSV в объекты класса DirectoryItem
     /// </summary>
     /// <param name="pathToCsv"></param>
     /// <returns>Список из объектов класса <see cref="DirectoryItem" /> </returns>
     /// <exception cref="FileLoadException"></exception>
-    public static List<DirectoryItem> GetItemsFromCsv(string pathToCsv)
-        // Можно разделить на два метода: CsvLinesParseToItem() и CsvLinesRead(),
-        // но лень обрабатывать ошибки дважды.
-    {
-        var items = new List<DirectoryItem>();
+    public static async Task<List<DirectoryItem>> GetItemsFromCsv(string pathToCsv)
 
-        // Для получения построчно таблиц из файла ReadLines предпочтительнее ReadAllLines
-        // т.к. тратит на порядок меньше ресурсов, считывая буквально построчно.
-        var csv = File.ReadLines(pathToCsv);
+    {
+        var csv = ParseLines(await ReadCsv(pathToCsv));
+
+        var items = new List<DirectoryItem>();
 
         // Я знаю, что это можно свернуть через LINQ,
         // но я этого не делаю потому, что не до конца в нём преисполнился.

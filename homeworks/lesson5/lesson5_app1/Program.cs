@@ -90,7 +90,7 @@ static class Lesson5App1
         // изменения) в текстовый файл в формате .csv (разделитель – \t (знак табуляции) )
         try
         {
-            CsvManager.RecordDirectoryContent(
+            await CsvManager.RecordDirectoryContent(
                 directoryItems: directoryContent,
                 fileName: CsvName,
                 separator: Separator);

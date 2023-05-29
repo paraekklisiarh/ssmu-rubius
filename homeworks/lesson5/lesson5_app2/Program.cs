@@ -21,7 +21,7 @@ static class Lesson5App2
     private static readonly string PathToDesiredFile =
         Environment.ExpandEnvironmentVariables(@"%AppData%/Lesson12Homework.txt");
 
-    static void Main()
+    static async Task Main()
     {
         // 1. Считывает путь к файлу из %AppData%/Lesson12Homework.txt
 
@@ -57,7 +57,7 @@ static class Lesson5App2
         List<DirectoryItem> contentList;
         try
         {
-            contentList = CsvManager.GetItemsFromCsv(pathToCsvFile);
+            contentList = await CsvManager.GetItemsFromCsv(pathToCsvFile);
         }
         catch (Exception e)
         {
@@ -73,6 +73,6 @@ static class Lesson5App2
         }
 
         // 4. Удаляет файл %AppData%/Lesson12Homework.txt
-        File.Delete(PathToDesiredFile);
+        // File.Delete(PathToDesiredFile);
     }
 }

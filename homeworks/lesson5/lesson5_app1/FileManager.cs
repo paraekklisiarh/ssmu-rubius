@@ -37,7 +37,7 @@ public static class FileManager
     /// </summary>
     /// <param name="filePath"></param>
     /// <param name="content"></param>
-    public static void ForceRecordToNewFile(string filePath, string content)
+    public static async Task ForceRecordToNewFileAsync(string filePath, string content)
     {
         if (File.Exists(filePath))
         {
@@ -45,8 +45,9 @@ public static class FileManager
             Console.WriteLine($"Удален существующий файл {filePath}");
         }
 
-        using var writer = new StreamWriter(filePath);
-        writer.Write(content);
+        await using var writer = new StreamWriter(filePath);
+        await writer.WriteAsync(content);
+        
         // Так можно делать только если всегда ожидаем микроскопическую запись, а мы ожидаем.
         Console.WriteLine($"\"{content}\" записано в {filePath}");
     }

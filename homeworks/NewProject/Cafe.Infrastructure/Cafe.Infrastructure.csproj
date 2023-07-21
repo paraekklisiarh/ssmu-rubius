@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Cafe.Infrastructure</AssemblyName>
+        <RootNamespace>Cafe.Infrastructure</RootNamespace>
+        <PackageId>Cafe.Infrastructure</PackageId>
+        <Authors>Cafe.Infrastructure</Authors>
+        <Company>Cafe.Infrastructure</Company>
+        <Product>Cafe.Infrastructure</Product>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Cafe.Entities\Cafe.Entities.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.4.23259.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0-preview.4.23259.3" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+    </ItemGroup>
+
+</Project>
